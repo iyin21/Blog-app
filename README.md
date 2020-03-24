@@ -1,0 +1,1 @@
+This project contains html, css, javascript and nodejs for a blog webapp.
