@@ -1,0 +1,7 @@
+<%- include('partials/header'); -%>
+
+<%posts.forEach(function(post){ %>
+	<h1><%= post.title %></h1>
+	<p>Posted in <%= post.categories %> by <%= post.author %> on <%= moment(post.date).format("MM-DD-YYYY") %></p>
+<% }); %>
+<%- include('partials/footer'); -%>
