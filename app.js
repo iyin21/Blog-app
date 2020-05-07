@@ -8,6 +8,7 @@ var flash = require('connect-flash');
 
 //requiring routes
 var indexRoutes = require("./routes/index");
+var postRoutes = require("./routes/posts");
 //mongoose setup
 mongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
 
@@ -31,6 +32,7 @@ app.use(express.static(__dirname + "/public/images/uploads"));
 app.use(flash());
 
 app.use(indexRoutes);
+app.use("/posts", postRoutes);
 
 app.listen(2000, function(){
 	console.log("Blogapp has started");
