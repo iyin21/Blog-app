@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<title>Blog</title>
-		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 	</head>
 	<body>	
@@ -13,8 +13,15 @@
   			</button>
   			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		        <a class="nav-link active" href="/">Home</a>
-		        <a class="nav-link" href="/post">Add Post</a>
+		        <a class="nav-link" href="/posts/add">Add Post</a>
 		        <a class="nav-link" href="/article">Add article</a>
 		        <a class="nav-link" href="#">CONTACT US</a>
 		    </div>    
-		   </nav>
+		</nav>
+		   <div class="container">
+		   	<% if(errors && errors.length>0){ %>
+		   	<div class="alert alert-danger" role="alert">
+		   		<%= errors.msg %>
+		   	</div>
+		   	<% } %>
+		   </div>

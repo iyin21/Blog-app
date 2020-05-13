@@ -2,27 +2,46 @@
 <div class="container">
 	<h1 class="text-center"></h1>
 	<form action="/posts" method="post">
-		<div class="form-group">
-			<input class="form-control" type="text" name="title" placeholder="Title">
+		<div class="form-group row">
+			<label for="title" class="col-sm-2 col-form-label">Title</label>
+			<div class="col-sm-10">
+				<input class="form-control" type="text" name="title" placeholder="Title">
+			</div>	
 		</div>
-		<div class="form-group">
-			<label>Category</label>
-			<select.form-control name="category">
+		<div class="form-group row">
+			<label for="category" class="col-sm-2 col-form-label">Category</label>
+			<div class="col-sm-10">
+				<select class="form-control" name="category">
+				<option>Fashion</option>
+				<option>Technology</option>
+				<option>Health</option>
+				<option>Education</option>
+				</select>
+			</div>	
 		</div>
-		<div class="form-group">
-			<input class="form-control" type="text" name="body" placeholder="Body">
+		<div class="form-group row">
+			<label for="body" class="col-sm-2 col-form-label">Body</label>
+			<div class="col-sm-10">
+				<textarea class="form-control" name="body" rows="3"></textarea>
+			</div>
+		</div>	
+		<div class="form-group row">
+			<label for="picture" class="col-sm-2 col-form-label">Picture</label>
+			<div class="col-sm-10">
+		  	  <input type="file" class="form-control-file" name="picture">
+		  	</div>  
 		</div>
-		<div class="form-group">
-		<label for="picture">Picture</label>
-	    <input type="file" class="form-control-file" name="picture">
+		<div class="form-group row">
+			<label for="author" class="col-sm-2 col-form-label">Author</label>
+			<div class="col-sm-10">
+				<input class="form-control" type="text" name="author">
+			</div>	
 		</div>
-		<div class="form-group">
-			<label>Category</label>
-			<select.form-control name="category">
-		</div>
-		<div class="form-group">
-			<button class="btn btn-primary btn-lg btn-block">Submit!</button>
-		</div>
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<button class="btn btn-primary">Submit!</button>
+			</div>
+		</div>	
 	</form>
 </div>
 

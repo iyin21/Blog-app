@@ -2,8 +2,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var session = require("express-session");
+var { check, validationResult } = require('express-validator');
+//var check = require('express-validator');
+//var validationResult = require('express-validator');
 var mongoose = require("mongoose");
 var multer = require('multer');
+var Post = require("./models/post");
 var flash = require('connect-flash');
 
 //requiring routes
@@ -27,9 +31,34 @@ app.set('view engine', 'ejs');
 
 //setup file uploads
 app.use(multer({dest:'./uploads'}).single('photo'));
-app.use(express.static(__dirname + "/public/images/uploads"));
+app.use(express.static(__dirname + "/public"));
 //setup flash
 app.use(flash());
+app.use(function(req, res, next){
+	res.locals.messages = require('express-messages')(req, res);
+	next();
+});
+app.use(function(req, res, next){
+  res.locals.errors = req.flash("errors");
+  next();
+});
+//Express validator
+// app.use(expressValidator({
+// 	errorFormatter: function(param, msg, value) {
+//       var namespace = param.split('.')
+//       , root    = namespace.shift()
+//       , formParam = root;
+
+//     while(namespace.length) {
+//       formParam += '[' + namespace.shift() + ']';
+//     }
+//     return {
+//       param : formParam,
+//       msg   : msg,
+//       value : value
+//     };
+//   }
+// }));
 
 app.use(indexRoutes);
 app.use("/posts", postRoutes);
