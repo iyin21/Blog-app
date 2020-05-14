@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var app = express();
 var bodyParser = require("body-parser");
 var session = require("express-session");
@@ -30,7 +31,7 @@ app.set('view engine', 'ejs');
 
 
 //setup file uploads
-app.use(multer({dest:'./uploads'}).single('photo'));
+app.use(multer({dest:'./uploads'}).single('mainPicture'));
 app.use(express.static(__dirname + "/public"));
 //setup flash
 app.use(flash());
@@ -39,6 +40,8 @@ app.use(function(req, res, next){
 	next();
 });
 app.use(function(req, res, next){
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   res.locals.errors = req.flash("errors");
   next();
 });

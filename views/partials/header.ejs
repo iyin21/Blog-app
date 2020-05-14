@@ -15,13 +15,25 @@
 		        <a class="nav-link active" href="/">Home</a>
 		        <a class="nav-link" href="/posts/add">Add Post</a>
 		        <a class="nav-link" href="/article">Add article</a>
+		        <a class="nav-link" href="/article">Newsletters</a>
+		        <a class="nav-link" href="/article">Deals </a>
 		        <a class="nav-link" href="#">CONTACT US</a>
 		    </div>    
 		</nav>
 		   <div class="container">
+		   	<% if(success && success.length>0){ %>
+      		<div class="alert alert-success" role="alert">
+        		<%= success %>
+      		</div>
+		    <% } %>
+		    <% if(error && error.length>0){ %>
+		    <div class="alert alert-danger" role="alert">
+		        <%= error %>
+		    </div>
+		    <% } %>
 		   	<% if(errors && errors.length>0){ %>
 		   	<div class="alert alert-danger" role="alert">
-		   		<%= errors.msg %>
+		   		<%= errors %>
 		   	</div>
 		   	<% } %>
 		   </div>

@@ -2,7 +2,8 @@
 
 <%posts.forEach(function(post){ %>
 	<h1><a href="/posts/show/<%= post._id %>"<%= post.title %></a></h1>
-	<p>Posted in <%= post.categories %> by <%= post.author %> on <%= moment(post.date).format("MM-DD-YYYY") %></p>
+	<p>Posted in <%= post.category %> by <%= post.author %> on <%= moment(post.date).format("MM-DD-YYYY") %></p>
+	<img src="./uploads/<%= post.mainPicture %>">
 	<p><%= post.body %></p>
 	<a href="/posts/show/<%= post._id %>" class="btn btn-primary">Read more</a>
 <% }); %>

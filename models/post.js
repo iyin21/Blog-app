@@ -2,8 +2,9 @@ var mongoose = require("mongoose");
 
 var PostSchema = new mongoose.Schema({
 	title: String,
-	categories: String,
+	category: String,
 	body: String,
+	mainPicture:String,
 	author: String,
 	date: {type: Date, default: Date.now}
 });
