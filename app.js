@@ -18,6 +18,12 @@ var postRoutes = require("./routes/posts");
 mongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
 
 app.locals.moment = require("moment");
+
+app.locals.truncateText = function(text, length){
+	var truncatedText = text.substring(0, length);
+	return truncatedText;
+}
+
 app.use(bodyParser.urlencoded({extended : true})) ;
 //Express session
 app.use(session({
@@ -31,7 +37,18 @@ app.set('view engine', 'ejs');
 
 
 //setup file uploads
-app.use(multer({dest:'./uploads'}).single('mainPicture'));
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage }).single('mainPicture');
+//app.use(express.static(path.join(__dirname, 'public/images/uploads')));
+//app.use(multer({dest:'./public/images/uploads'}).single('mainPicture'));
 app.use(express.static(__dirname + "/public"));
 //setup flash
 app.use(flash());

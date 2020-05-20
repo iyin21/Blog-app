@@ -2,8 +2,20 @@ var express = require("express");
 var router = express.Router();
 var Post = require("../models/post");
 var { check, validationResult } = require('express-validator');
-//var multer  = require('multer')
-//var upload = multer({ dest: '../uploads/' })
+var multer  = require('multer')
+var path = require('path');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/uploads') //Destination folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname) //File name after saving
+  }
+})
+
+var uploads = multer({ storage: storage })
+
 
 
 router.get("/add", function(req, res) {
@@ -12,9 +24,9 @@ router.get("/add", function(req, res) {
 	});
 });
 
-router.post("/", [check('title', "Title is required").not().isEmpty(),
+router.post("/", uploads.single('mainPicture'), [check('title', "Title is required").not().isEmpty(),
 	check('body', "Body is required").not().isEmpty()
-], function(req, res){
+],  function(req, res){
 	//var result= validationResult(req);
     //var errors = result.errors;	
     var errors = validationResult(req);
@@ -26,16 +38,17 @@ router.post("/", [check('title', "Title is required").not().isEmpty(),
 	var author = req.body. author;
 	var date = new Date();
 
-	if(req.body.mainPicture){
-		var pictureOriginalName = req.files.mainPicture.OriginalName
-		var pictureName 		 = req.files.mainPicture.name;
-		var pictureMine		 = req.files.mainPicture.mimetype;
-		var picturePath		 = req.files.mainPicture.path;
-		var pictureExt		 = req.files.mainPicture.extension;
-		var pictureSize		 = req.files.mainPicture.size;
+	if(req.file){
+		var mainPictureOriginalName = req.file.originalname;
+		var mainPictureName 		 = req.file.filename;
+		var mainPictureMime		 = req.file.mimetype;
+		var mainPicturePath		 = req.file.path;
+		var mainPictureExt		 = req.file.extension;
+		var mainPictureSize		 = req.file.size;
 	}else{
-		var mainPictureName = 'noimage.png';
+	 	var mainPictureName = 'noimage.png';
 	}
+	console.log(req.file);
 
 	//form validation
 	
