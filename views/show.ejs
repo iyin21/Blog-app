@@ -1,11 +1,22 @@
 <%- include('partials/header'); -%>
-
-<%posts.forEach(function(post){ %>
-	<h1><a href="/posts/show/<%= post._id %>"><%= post.title %></a></h1>
+<div class="container">
+	<h1><%= post.title %></h1>
 	<p>Posted in <a href="/posts/show/<%=post.category %>"><%= post.category %></a> by <%= post.author %> on <%= moment(post.date).format("MM-DD-YYYY") %></p>
 	<img src="/images/uploads/<%= post.mainPicture %>" height="500cm" width="500cm">
 	<p><%= truncateText(post.body, 10)%></p>
 	<a href="/posts/show/<%= post._id %>" class="btn btn-primary">Read more</a>
-<% }); %>
+	<br> 
+	<div class="text-right">
+		<a class="btn btn-success" href="/Posts/<%= post._id %>/comments/new">Add New Comment</a>
+	</div>
+	<% post.comments.forEach(function(comment){ %>
+		<div class="row">
+			<strong><%= comment.name %></strong>
+			<p>comment.text</p>
+		</div>
+
+	<%}); %>
+</div>
+
 
 <%- include('partials/footer'); -%>

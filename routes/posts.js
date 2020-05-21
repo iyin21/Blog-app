@@ -76,6 +76,20 @@ router.post("/", uploads.single('mainPicture'), [check('title', "Title is requir
 
 	}	
 });
+router.get("/show/:id", function(req, res){
+	Post.findById(req.params.id, function(err, post){
+		res.render("show",{
+			post:post
+		});
+	});
+});
+router.get("/show/:category", function(req, res){
+	Post.find({category: req.params.category}, function(err, categories){
+		res.render("home",{
+			title: req.params.category,
+			posts:categories
 
-
+		});
+	});
+});
 module.exports = router;

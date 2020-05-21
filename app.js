@@ -22,7 +22,7 @@ app.locals.moment = require("moment");
 app.locals.truncateText = function(text, length){
 	var truncatedText = text.substring(0, length);
 	return truncatedText;
-}
+};
 
 app.use(bodyParser.urlencoded({extended : true})) ;
 //Express session
