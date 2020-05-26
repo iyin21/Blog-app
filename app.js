@@ -9,11 +9,13 @@ var { check, validationResult } = require('express-validator');
 var mongoose = require("mongoose");
 var multer = require('multer');
 var Post = require("./models/post");
+var Comment = require("./models/comment");
 var flash = require('connect-flash');
 
 //requiring routes
 var indexRoutes = require("./routes/index");
 var postRoutes = require("./routes/posts");
+var commentRoutes = require("./routes/comments")
 //mongoose setup
 mongoose.connect("mongodb://localhost/blogapp",{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
 
@@ -82,6 +84,7 @@ app.use(function(req, res, next){
 
 app.use(indexRoutes);
 app.use("/posts", postRoutes);
+app.use("/posts/show/:id/comments", commentRoutes);
 
 app.listen(2000, function(){
 	console.log("Blogapp has started");

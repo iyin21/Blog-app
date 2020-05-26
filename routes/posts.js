@@ -77,7 +77,7 @@ router.post("/", uploads.single('mainPicture'), [check('title', "Title is requir
 	}	
 });
 router.get("/show/:id", function(req, res){
-	Post.findById(req.params.id, function(err, post){
+	Post.findById(req.params.id).populate("comments").exec(function(err, post){
 		res.render("show",{
 			post:post
 		});

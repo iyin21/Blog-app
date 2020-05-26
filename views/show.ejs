@@ -7,15 +7,15 @@
 	<a href="/posts/show/<%= post._id %>" class="btn btn-primary">Read more</a>
 	<br> 
 	<div class="text-right">
-		<a class="btn btn-success" href="/Posts/<%= post._id %>/comments/new">Add New Comment</a>
+		<a class="btn btn-success" href="/posts/show/<%= post._id %>/comments/new">Add New Comment</a>
 	</div>
 	<% post.comments.forEach(function(comment){ %>
 		<div class="row">
 			<strong><%= comment.name %></strong>
-			<p>comment.text</p>
+			<p><%= comment.text %></p>
 		</div>
 
-	<%}); %>
+	<%}) %>
 </div>
 
 
