@@ -1,5 +1,5 @@
 var express = require("express");
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var Post = require("../models/post");
 var Comment = require("../models/comment");
 
@@ -24,11 +24,11 @@ router.post("/", function(req, res){
 				if(err){
 					req.flash("error", "Something went wrong")
 				}else{
-					comment.save()
+					comment.save();
 					post.comments.push(comment);
 					post.save();
 					req.flash("success", "Succesfully added comment");
-					res.redirect("/posts/"+ "post._id");
+					res.redirect("/posts/show/"+ post._id);
 				}
 			})
 			

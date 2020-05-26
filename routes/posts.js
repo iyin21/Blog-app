@@ -76,13 +76,6 @@ router.post("/", uploads.single('mainPicture'), [check('title', "Title is requir
 
 	}	
 });
-router.get("/show/:id", function(req, res){
-	Post.findById(req.params.id).populate("comments").exec(function(err, post){
-		res.render("show",{
-			post:post
-		});
-	});
-});
 router.get("/show/:category", function(req, res){
 	Post.find({category: req.params.category}, function(err, categories){
 		res.render("home",{
@@ -92,4 +85,15 @@ router.get("/show/:category", function(req, res){
 		});
 	});
 });
+router.get("/show/:id", function(req, res){
+	Post.findById(req.params.id).populate("comments").exec(function(err, post){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(post)
+			res.render("show",{post:post})
+		}		
+	});
+});
+
 module.exports = router;

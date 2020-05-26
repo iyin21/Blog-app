@@ -1,11 +1,15 @@
 <%- include('partials/header'); -%>
 
-<%posts.forEach(function(post){ %>
-	<h1><a href="/posts/show/<%= post._id %>"><%= post.title %></a></h1>
-	<p>Posted in <a href="/posts/show/<%=post.category %>"><%= post.category %></a> by <%= post.author %> on <%= moment(post.date).format("MM-DD-YYYY") %></p>
-	<img src="/images/uploads/<%= post.mainPicture %>" height="500cm" width="500cm">
-	<p><%= truncateText(post.body, 10)%></p>
-	<a href="/posts/show/<%= post._id %>" class="btn btn-primary">Read more</a>
-<% }); %>
+<div class="row auto text-center" style="display:flex;">
+	<%posts.forEach(function(post){ %>
+		<div class="col-md-3 col-sm-6">
+			<h1><a href="/posts/show/<%= post._id %>"><%= post.title %></a></h1>
+			<p>Posted in <a href="/posts/show/<%=post.category %>"><%= post.category %></a> by <%= post.author %> on <%= moment(post.date).format("MM-DD-YYYY") %></p>
+			<img class="card-img-top" src="/images/uploads/<%= post.mainPicture %>">
+			<p><%= truncateText(post.body, 10)%></p>
+			<a href="/posts/show/<%= post._id %>" class="btn btn-primary">Read more</a>
+		</div>
+	<% }); %>
+</div>	
 
 <%- include('partials/footer'); -%>
